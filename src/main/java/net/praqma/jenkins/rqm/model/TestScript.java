@@ -121,7 +121,7 @@ public class TestScript extends RqmObject<TestScript> {
         try {            
             customAttributes.clear();
             Document doc = RqmObject.getDocumentReader(xml);            
-            NodeList list = doc.getElementsByTagName("ns6:title");     
+            NodeList list = doc.getElementsByTagName("ns4:title");     
             String title = null;
             for(int i=0; i<list.getLength(); i++) {
                 Node elem = list.item(i);
