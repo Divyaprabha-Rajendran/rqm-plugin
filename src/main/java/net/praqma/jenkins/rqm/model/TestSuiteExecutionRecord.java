@@ -105,7 +105,7 @@ public class TestSuiteExecutionRecord extends RqmObject<TestSuiteExecutionRecord
             //Add testplan and testsuite to the record
             Document doc = RqmObject.getDocumentReader(res.t2);
             
-            NodeList n = doc.getElementsByTagName("ns4:suiteexecutionrecord");
+            NodeList n = doc.getElementsByTagName("ns2:suiteexecutionrecord");
             log.fine( String.format( "Found %s test suite execution records", n.getLength() ));
             
             for(int i = 0; i<n.getLength(); i++) {
@@ -113,16 +113,16 @@ public class TestSuiteExecutionRecord extends RqmObject<TestSuiteExecutionRecord
                 Node nl = n.item(i);                    
                 if(nl.getNodeType() == Node.ELEMENT_NODE) {
                     Element suiteElement = (Element)nl;
-                    String testSuiteExecutionRecordHref = suiteElement.getElementsByTagName("ns6:identifier").item(0).getTextContent();
-                    String tserTitle = suiteElement.getElementsByTagName("ns6:title").item(0).getTextContent();
+                    String testSuiteExecutionRecordHref = suiteElement.getElementsByTagName("ns4:identifier").item(0).getTextContent();
+                    String tserTitle = suiteElement.getElementsByTagName("ns4:title").item(0).getTextContent();
                     //TODO: This one can be null. Fix in the future, as you can get a null pointer exec
-                    Element testPlanHrefElement = ((Element)suiteElement.getElementsByTagName("ns4:testplan").item(0));
+                    Element testPlanHrefElement = ((Element)suiteElement.getElementsByTagName("ns2:testplan").item(0));
                     if(testPlanHrefElement != null) {
                         record.setTestPlan(new TestPlan(testPlanHrefElement.getAttribute("href")).read(parameters, listener).get(0));
                     } else {
                         record.setTestPlan(null);
                     }
-                    String testSuiteHref = ((Element)suiteElement.getElementsByTagName("ns4:testsuite").item(0)).getAttribute("href");                    
+                    String testSuiteHref = ((Element)suiteElement.getElementsByTagName("ns2:testsuite").item(0)).getAttribute("href");                    
                     /**
                      * Load the objects
                      */
