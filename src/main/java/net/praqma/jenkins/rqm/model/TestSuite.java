@@ -59,26 +59,26 @@ public class TestSuite extends RqmObject<TestSuite> implements Comparable<TestSu
             log.fine("Initializing test suite...");
             Document doc = RqmObject.getDocumentReader(xml);
             
-            NodeList list = doc.getElementsByTagName("ns4:testsuite");
+            NodeList list = doc.getElementsByTagName("ns2:testsuite");
 
             for(int i=0; i<list.getLength(); i++) {
                 
                 Node elem = list.item(i);
                 if(elem.getNodeType() == Node.ELEMENT_NODE) {
                     Element el = (Element)elem;
-                    String title = el.getElementsByTagName("ns6:description").item(0).getTextContent();
+                    String title = el.getElementsByTagName("ns4:description").item(0).getTextContent();
                     
                     //Now find all suite elements
-                    NodeList suiteElements = el.getElementsByTagName("ns4:suiteelement");
+                    NodeList suiteElements = el.getElementsByTagName("ns2:suiteelement");
                     for(int selement = 0; selement<suiteElements.getLength(); selement++) {
                         
                         int executionOrder = Integer.parseInt(((Element)suiteElements.item(selement)).getAttribute("elementindex"))+1;
                         
                         if(suiteElements.item(selement).getNodeType() == Node.ELEMENT_NODE) {
                             Element suteElem = (Element)suiteElements.item(selement);
-                            String testCaseHref = ((Element)suteElem.getElementsByTagName("ns4:testcase").item(0)).getAttribute("href");
+                            String testCaseHref = ((Element)suteElem.getElementsByTagName("ns2:testcase").item(0)).getAttribute("href");
                             
-                            NodeList nlTestScript = suteElem.getElementsByTagName("ns4:remotescript");
+                            NodeList nlTestScript = suteElem.getElementsByTagName("ns2:remotescript");
                             TestCase tc = new TestCase(testCaseHref);
                             
                             if (nlTestScript.getLength() > 0) {
